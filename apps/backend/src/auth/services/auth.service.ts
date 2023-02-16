@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import {BadRequestException, HttpException, HttpStatus, Injectable} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
@@ -11,7 +11,9 @@ import { LoginOutput } from "src/auth/outputs/login.output";
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const generateJWT = (id: number, secret: string) => jwt.sign({ id }, secret, { expiresIn: '24h' });
+const generateJWT = (id: number, secret: string) => {
+  return jwt.sign({ id }, secret, { expiresIn: '24h' });
+};
 
 @Injectable()
 export class AuthService {
@@ -26,10 +28,7 @@ export class AuthService {
     const candidate = await this.userRepository.findOneBy({ email });
 
     if (candidate) {
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: `User with email ${email} is already exists`,
-      }, HttpStatus.BAD_REQUEST);
+      throw new BadRequestException(`User with email ${email} is already exists`);
     }
 
     const hashPassword: string = bcrypt.hashSync(password, 7);
@@ -41,18 +40,12 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({ email });
 
     if (!user) {
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: `User with email ${email} does not exists`,
-      }, HttpStatus.BAD_REQUEST);
+      throw new BadRequestException(`User with email ${email} does not exists`);
     }
 
     const validPassword = bcrypt.compareSync(password, user.password);
     if (!validPassword) {
-      throw new HttpException({
-        status: HttpStatus.BAD_REQUEST,
-        error: `Password incorrect`,
-      }, HttpStatus.BAD_REQUEST);
+      throw new BadRequestException('Password incorrect');
     }
 
     const secretKey = this.configService.get<string>('SECRET_KEY');

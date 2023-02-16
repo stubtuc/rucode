@@ -1,3 +1,4 @@
+import * as React from "react";
 import { ApolloProvider } from "@apollo/client";
 import { AppProps } from 'next/app';
 

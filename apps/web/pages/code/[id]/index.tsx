@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import "ui/styles.css";
-import { CodeEditor } from "ui";
-import withNavbar from "ui/layouts/withNavbar";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/client";
-import { getSnippetById, updateSnippet } from "../../../api/services/snippets/snippets.service";
+
+import "ui/styles.css";
+import { CodeEditor, withNavbar } from "ui";
+import { getSnippetById, updateSnippet } from "api/services/snippets/snippets.service";
 
 type Language = 'html' | 'css' | 'javascript';
 type CodeSnippet = {

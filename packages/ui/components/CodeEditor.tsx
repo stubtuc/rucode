@@ -21,7 +21,7 @@ interface ICodeEditor {
   id: string
 }
 
-export const CodeEditor: React.FC<ICodeEditor> = ({ language, value, onChange, height, withoutResize, onResize, id }) => {
+const CodeEditor: React.FC<ICodeEditor> = ({ language, value, onChange, height, withoutResize, onResize, id }) => {
   const [initialPos, setInitialPos] = useState<number>(0);
   const [initialSize, setInitialSize] = useState<number>(0);
 
@@ -58,3 +58,5 @@ export const CodeEditor: React.FC<ICodeEditor> = ({ language, value, onChange, h
     </div>
   );
 };
+
+export default CodeEditor;

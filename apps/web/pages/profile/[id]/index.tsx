@@ -3,8 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import "ui/styles.css";
-import withNavbar from "ui/layouts/withNavbar";
-import { Button } from "ui";
+import { withNavbar, Button } from "ui";
 import { getUserById } from 'api/services/users/users.service';
 import { CODE, NEW_CODE } from 'routes';
 
