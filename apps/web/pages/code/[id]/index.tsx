@@ -39,7 +39,7 @@ const languages:Language[] = ['html', 'css', 'javascript'];
 
 function Code () {
   const router = useRouter();
-  const id = parseInt(router.query.id as string);
+  const id = router.query.id?.toString() as string;
   const isNew = router.query.id === 'new';
 
   const [snippet, setSnippet] = useState<CodeSnippet>({
@@ -50,7 +50,7 @@ function Code () {
   const [saved, setSaved] = useState<boolean>(true);
 
   useQuery(getSnippetById, {
-    variables: { id },
+    variables: { id: parseInt(id) },
     onCompleted: (data) => {
       const { html, css, js: javascript } = data.getSnippetById;
       setSnippet({ html, css, javascript });
@@ -84,7 +84,7 @@ function Code () {
         update({
           variables: {
             snippet: {
-              id: id as any as string, // todo check problem with type
+              id,
               html: snippet.html,
               css: snippet.css,
               js: snippet.javascript

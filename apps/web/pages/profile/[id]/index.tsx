@@ -1,11 +1,12 @@
 import React from "react";
-import withNavbar from "ui/layouts/withNavbar";
-import "ui/styles.css";
-import { Button } from "ui";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { getUserById } from "../../../api/services/users/users.service";
+import "ui/styles.css";
+import withNavbar from "ui/layouts/withNavbar";
+import { Button } from "ui";
+import { getUserById } from 'api/services/users/users.service';
+import { CODE, NEW_CODE } from 'routes';
 
 const Profile = () => {
   const router = useRouter();
@@ -29,7 +30,7 @@ const Profile = () => {
       <div className="snippets-container">
         {
           data?.getUserById?.projects?.map((snippet) => (
-            <Link href={`/code/${snippet.id}`}>
+            <Link {...CODE(snippet.id)}>
               <div className="snippet">
                 <p>{ snippet.name }</p>
               </div>
@@ -37,7 +38,7 @@ const Profile = () => {
           ))
         }
       </div>
-      <Link href="/code/new">
+      <Link {...NEW_CODE}>
         <Button label="Новый сниппет" />
       </Link>
     </div>
