@@ -32,6 +32,92 @@ button:hover {
     background: #4e40a4;
 }
 
+input {
+    box-sizing: border-box;
+    padding: 10px;
+
+    font-size: 16px;
+    color: #b1a9c6;
+
+    border-radius: 5px;
+
+    border: none;
+    outline: none;
+    width: 100%;
+
+    background: #18151e;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 250px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.disabled-btn {
+    color: #9991ae;
+    background: #595571;
+}
+.disabled-btn:hover {
+    background: #454258;
+}
+
+.form-field {
+    width: 100%;
+}
+
+.field-label {
+    display: block;
+    width: 100px;
+
+    font-size: 18px;
+    font-weight: 100;
+    color: #7a748b;
+
+    margin-bottom: 5px;
+
+    text-transform: capitalize;
+}
+
+.error-label {
+    display: block;
+    color: #806f9a;
+
+    margin-top: 5px;
+    padding: 7px;
+
+    font-size: 14px;
+
+    background: #3a324f;
+
+    border-radius: 7px;
+}
+
+.form-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+
+    width: 100%;
+}
+
+.form-footer p {
+    color: #595571;
+}
+
+a {
+    color: #5a49b9;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;

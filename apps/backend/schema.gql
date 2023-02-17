@@ -7,7 +7,7 @@ input CreateSnippetInput {
   html: String!
   js: String!
   name: String!
-  userId: Float!
+  userId: Float
 }
 
 input CreateUserInput {
@@ -29,12 +29,17 @@ input LoginInput {
 type LoginOutput {
   """Generated access_token of the user"""
   access_token: String!
+
+  """User id"""
+  id: ID!
 }
 
 type Mutation {
   createSnippet(createSnippet: CreateSnippetInput!): SnippetEntity!
   createUser(createUser: CreateUserInput!): UserEntity!
   deleteUser(id: Float!): UserEntity!
+  login(loginInput: LoginInput!): LoginOutput!
+  register(registerInput: RegisterInput!): UserEntity!
   updateSnippet(updateSnippet: UpdateSnippetInput!): SnippetEntity!
   updateUser(updateUser: UpdateUserInput!): UserEntity!
 }
@@ -44,8 +49,6 @@ type Query {
   getAllUsers: [UserEntity!]!
   getSnippetById(id: Float!): SnippetEntity!
   getUserById(id: Float!): UserEntity!
-  login(loginInput: LoginInput!): LoginOutput!
-  register(registerInput: RegisterInput!): UserEntity!
 }
 
 input RegisterInput {

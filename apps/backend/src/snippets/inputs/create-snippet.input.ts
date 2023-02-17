@@ -14,6 +14,6 @@ export class CreateSnippetInput {
   @Field()
   name: string;
 
-  @Field()
+  @Field({ nullable: true })
   userId: number;
 }

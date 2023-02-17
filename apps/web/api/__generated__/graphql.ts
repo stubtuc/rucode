@@ -21,7 +21,7 @@ export type CreateSnippetInput = {
   html: Scalars['String'];
   js: Scalars['String'];
   name: Scalars['String'];
-  userId: Scalars['Float'];
+  userId?: InputMaybe<Scalars['Float']>;
 };
 
 export type CreateUserInput = {
@@ -39,6 +39,8 @@ export type LoginOutput = {
   __typename?: 'LoginOutput';
   /** Generated access_token of the user */
   access_token: Scalars['String'];
+  /** User id */
+  id: Scalars['ID'];
 };
 
 export type Mutation = {
@@ -46,6 +48,8 @@ export type Mutation = {
   createSnippet: SnippetEntity;
   createUser: UserEntity;
   deleteUser: UserEntity;
+  login: LoginOutput;
+  register: UserEntity;
   updateSnippet: SnippetEntity;
   updateUser: UserEntity;
 };
@@ -66,6 +70,16 @@ export type MutationDeleteUserArgs = {
 };
 
 
+export type MutationLoginArgs = {
+  loginInput: LoginInput;
+};
+
+
+export type MutationRegisterArgs = {
+  registerInput: RegisterInput;
+};
+
+
 export type MutationUpdateSnippetArgs = {
   updateSnippet: UpdateSnippetInput;
 };
@@ -81,8 +95,6 @@ export type Query = {
   getAllUsers: Array<UserEntity>;
   getSnippetById: SnippetEntity;
   getUserById: UserEntity;
-  login: LoginOutput;
-  register: UserEntity;
 };
 
 
@@ -93,16 +105,6 @@ export type QueryGetSnippetByIdArgs = {
 
 export type QueryGetUserByIdArgs = {
   id: Scalars['Float'];
-};
-
-
-export type QueryLoginArgs = {
-  loginInput: LoginInput;
-};
-
-
-export type QueryRegisterArgs = {
-  registerInput: RegisterInput;
 };
 
 export type RegisterInput = {
@@ -150,6 +152,20 @@ export type UserEntity = {
   updatedAt: Scalars['DateTime'];
 };
 
+export type RegisterMutationVariables = Exact<{
+  user: RegisterInput;
+}>;
+
+
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'UserEntity', id: string, email: string, name?: string | null } };
+
+export type LoginMutationVariables = Exact<{
+  user: LoginInput;
+}>;
+
+
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginOutput', access_token: string, id: string } };
+
 export type GetSnippetByIdQueryVariables = Exact<{
   id: Scalars['Float'];
 }>;
@@ -177,6 +193,8 @@ export type GetUserByIdQueryVariables = Exact<{
 export type GetUserByIdQuery = { __typename?: 'Query', getUserById: { __typename?: 'UserEntity', id: string, name?: string | null, projects: Array<{ __typename?: 'SnippetEntity', id: string, name?: string | null, html: string, css: string, js: string }> } };
 
 
+export const RegisterDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RegisterInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"register"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"registerInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"LoginInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"loginInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"access_token"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const GetSnippetByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getSnippetById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getSnippetById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"html"}},{"kind":"Field","name":{"kind":"Name","value":"css"}},{"kind":"Field","name":{"kind":"Name","value":"js"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetSnippetByIdQuery, GetSnippetByIdQueryVariables>;
 export const UpdateSnippetDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateSnippet"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"snippet"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateSnippetInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateSnippet"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"updateSnippet"},"value":{"kind":"Variable","name":{"kind":"Name","value":"snippet"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"html"}},{"kind":"Field","name":{"kind":"Name","value":"css"}},{"kind":"Field","name":{"kind":"Name","value":"js"}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]}}]} as unknown as DocumentNode<UpdateSnippetMutation, UpdateSnippetMutationVariables>;
 export const GetAllUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getAllUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"projects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"html"}},{"kind":"Field","name":{"kind":"Name","value":"css"}},{"kind":"Field","name":{"kind":"Name","value":"js"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllUsersQuery, GetAllUsersQueryVariables>;

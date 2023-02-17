@@ -6,6 +6,7 @@ import "ui/styles.css";
 import { withNavbar, Button } from "ui";
 import { getUserById } from 'api/services/users/users.service';
 import { CODE, NEW_CODE } from 'routes';
+import {setCookie} from "typescript-cookie";
 
 const Profile = () => {
   const router = useRouter();

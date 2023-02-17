@@ -1,4 +1,4 @@
-import {BadRequestException, HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import {BadRequestException, Injectable} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
@@ -8,8 +8,8 @@ import { LoginInput } from "src/auth/inputs/login.input";
 import { ConfigService } from "@nestjs/config";
 import { LoginOutput } from "src/auth/outputs/login.output";
 
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const generateJWT = (id: number, secret: string) => {
   return jwt.sign({ id }, secret, { expiresIn: '24h' });
@@ -51,7 +51,7 @@ export class AuthService {
     const secretKey = this.configService.get<string>('SECRET_KEY');
     const token = generateJWT(user.id, secretKey);
 
-    return { access_token: token };
+    return { access_token: token, id: user.id };
   }
 
 }
