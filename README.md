@@ -32,57 +32,6 @@ npm run dev
 ```
 npm run compile
 ```
-Для отображения профиля пользователя необходимо создать запись в базе. 
-
-##### Пример запроса на создание пользователя:
-```
-mutation createUser($user: CreateUserInput!) {
-  createUser(createUser: $user) {
-    id
-    email
-    name
-    createdAt
-    updatedAt
-  }
-}
-```
-##### Payload:
-```
-{
-  "user": {
-    "email": "lol@aboba.com",
-    "name": "Lolita Kekka",
-    "password": "12345"
-  }
-}
-```
-##### Пример запроса на создание код-сниппета с привязкой к пользователю по `id`:
-```
-mutation createSnippet($snippet: CreateSnippetInput!) {
-  createSnippet(createSnippet: $snippet) {
-    name,
-    html,
-    css,
-    js,
-    id,
-  }
-}
-```
-##### Payload
-```
-{
-  "snippet": {
-    "name": "Первый проект!",
-    "userId": ${id пользователя}
-    "html": "<div class='app'>
-                <h1>My first <span>Rucode</span> project!</h1>
-                <button>Get started</button>
-            </div>",
-    "css": "",
-    "js": "",
-  }
-}
-```
 
 ### Страницы на фронте
 
