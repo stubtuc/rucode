@@ -15,8 +15,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n        mutation register($user: RegisterInput!) {\n            register(registerInput: $user) {\n                id\n                email\n                name\n            }\n        }\n    ": types.RegisterDocument,
     "\n        mutation login($user: LoginInput!) {\n          login(loginInput: $user) {\n            access_token\n            id\n          }\n        }\n    ": types.LoginDocument,
-    "\n    query getSnippetById($id: Float!) {\n        getSnippetById(id: $id) {\n            html,\n            css,\n            js,\n            name\n        }\n    }  \n  ": types.GetSnippetByIdDocument,
-    "\n    mutation updateSnippet($snippet: UpdateSnippetInput!) {\n      updateSnippet(updateSnippet: $snippet) {\n        id,\n        name,\n        html,\n        css,\n        js,\n        userId\n      }\n    }\n  ": types.UpdateSnippetDocument,
+    "\n    query getSnippetById($id: Float!) {\n        getSnippetById(id: $id) {\n            html\n            css\n            js\n            name\n            userId\n        }\n    }  \n  ": types.GetSnippetByIdDocument,
+    "\n    mutation createSnippet($snippet: CreateSnippetInput!) {\n      createSnippet(createSnippet: $snippet) {\n        name\n        html\n        css\n        js\n        id\n        userId\n      }\n    }\n  ": types.CreateSnippetDocument,
+    "\n    mutation updateSnippet($snippet: UpdateSnippetInput!) {\n      updateSnippet(updateSnippet: $snippet) {\n        id\n        name\n        html\n        css\n        js\n        userId\n      }\n    }\n  ": types.UpdateSnippetDocument,
     "\n    query getAllUsers {\n        getAllUsers {\n            id,\n            name,\n            email,\n            createdAt,\n            updatedAt,\n            projects {\n                id,\n                name,\n                html,\n                css,\n                js\n            }\n        }\n    }\n  ": types.GetAllUsersDocument,
     "\n    query getUserById($id: Float!) {\n        getUserById(id: $id) {\n            id,\n            name,\n            projects {\n                id,\n                name,\n                html,\n                css,\n                js\n            }\n        }\n    }\n  ": types.GetUserByIdDocument,
 };
@@ -46,11 +47,15 @@ export function graphql(source: "\n        mutation login($user: LoginInput!) {\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    query getSnippetById($id: Float!) {\n        getSnippetById(id: $id) {\n            html,\n            css,\n            js,\n            name\n        }\n    }  \n  "): (typeof documents)["\n    query getSnippetById($id: Float!) {\n        getSnippetById(id: $id) {\n            html,\n            css,\n            js,\n            name\n        }\n    }  \n  "];
+export function graphql(source: "\n    query getSnippetById($id: Float!) {\n        getSnippetById(id: $id) {\n            html\n            css\n            js\n            name\n            userId\n        }\n    }  \n  "): (typeof documents)["\n    query getSnippetById($id: Float!) {\n        getSnippetById(id: $id) {\n            html\n            css\n            js\n            name\n            userId\n        }\n    }  \n  "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n    mutation updateSnippet($snippet: UpdateSnippetInput!) {\n      updateSnippet(updateSnippet: $snippet) {\n        id,\n        name,\n        html,\n        css,\n        js,\n        userId\n      }\n    }\n  "): (typeof documents)["\n    mutation updateSnippet($snippet: UpdateSnippetInput!) {\n      updateSnippet(updateSnippet: $snippet) {\n        id,\n        name,\n        html,\n        css,\n        js,\n        userId\n      }\n    }\n  "];
+export function graphql(source: "\n    mutation createSnippet($snippet: CreateSnippetInput!) {\n      createSnippet(createSnippet: $snippet) {\n        name\n        html\n        css\n        js\n        id\n        userId\n      }\n    }\n  "): (typeof documents)["\n    mutation createSnippet($snippet: CreateSnippetInput!) {\n      createSnippet(createSnippet: $snippet) {\n        name\n        html\n        css\n        js\n        id\n        userId\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n    mutation updateSnippet($snippet: UpdateSnippetInput!) {\n      updateSnippet(updateSnippet: $snippet) {\n        id\n        name\n        html\n        css\n        js\n        userId\n      }\n    }\n  "): (typeof documents)["\n    mutation updateSnippet($snippet: UpdateSnippetInput!) {\n      updateSnippet(updateSnippet: $snippet) {\n        id\n        name\n        html\n        css\n        js\n        userId\n      }\n    }\n  "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

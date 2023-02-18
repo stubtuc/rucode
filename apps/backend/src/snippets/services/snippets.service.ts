@@ -21,6 +21,7 @@ export class SnippetsService {
     return await this.snippetRepository.findOneBy({ id });
   }
 
+
   async createSnippet(createSnippetInput: CreateSnippetInput): Promise<SnippetEntity> {
     return await this.snippetRepository.save(createSnippetInput);
   }

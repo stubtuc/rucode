@@ -63,10 +63,10 @@ type SnippetEntity {
   html: String!
   id: ID!
   js: String!
-  name: String
+  name: String!
   updatedAt: DateTime!
   user: UserEntity!
-  userId: Float
+  userId: Float!
 }
 
 input UpdateSnippetInput {
@@ -75,6 +75,7 @@ input UpdateSnippetInput {
   id: ID!
   js: String
   name: String
+  userId: Float!
 }
 
 input UpdateUserInput {

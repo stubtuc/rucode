@@ -24,8 +24,8 @@ export class SnippetEntity {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
+  @Field()
+  @Column()
   name: string;
 
   @Field()
@@ -40,8 +40,8 @@ export class SnippetEntity {
   @Column()
   js: string;
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
+  @Field()
+  @Column()
   userId: number;
 
   @Field(() => UserEntity)

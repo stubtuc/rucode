@@ -16,4 +16,7 @@ export class UpdateSnippetInput {
 
   @Field({ nullable: true })
   name: string;
+
+  @Field()
+  userId: number;
 }

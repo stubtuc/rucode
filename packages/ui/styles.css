@@ -208,6 +208,21 @@ a {
     text-transform: uppercase;
 }
 
+.snippet-name-container {
+    flex: auto;
+}
+
+.snippet-name-input {
+    width: fit-content;
+
+    padding: 0 5px;
+    margin-left: 15px;
+
+    font-size: 26px;
+
+    background: transparent;
+}
+
 .profile-container {
     padding: 30px;
     /*margin: 0px 7px 7px 7px;*/

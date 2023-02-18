@@ -1,16 +1,16 @@
 import React, {useEffect} from "react";
-import {getCookie} from "typescript-cookie";
 import {movePage, PROFILE, REGISTER} from "routes";
+import {useUser} from "hooks/useUser";
 
 const Page = () => {
+    const { user } = useUser();
     useEffect(() => {
-        const userId = getCookie('rucode_user_id');
-        if (userId) {
-            movePage(PROFILE(userId));
+        if (user.id !== 'Unauthorized') {
+            movePage(PROFILE(user.id));
         } else {
             movePage(REGISTER);
         }
-    }, []);
+    }, [user]);
 
     return <div />;
 }

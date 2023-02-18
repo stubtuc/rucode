@@ -4,7 +4,7 @@ import { SnippetEntity } from "src/snippets/entities/snippet.entity";
 import { CreateSnippetInput } from "src/snippets/inputs/create-snippet.input";
 import { SnippetsService } from "src/snippets/services/snippets.service";
 import { UpdateSnippetInput } from "src/snippets/inputs/update-snippet.input";
-import {UseGuards} from "@nestjs/common";
+import {MethodNotAllowedException, UseGuards} from "@nestjs/common";
 import {JwtGuard} from "src/auth/utils/jwt/JwtGuard";
 import {UserID} from "src/auth/utils/decorators/UserID.decorator";
 
@@ -33,7 +33,13 @@ export class SnippetsResolver {
 
   @UseGuards(JwtGuard)
   @Mutation(() => SnippetEntity)
-  async updateSnippet(@Args('updateSnippet') updateSnippetInput: UpdateSnippetInput): Promise<SnippetEntity> {
+  async updateSnippet(
+      @UserID() userId: number,
+      @Args('updateSnippet') updateSnippetInput: UpdateSnippetInput
+  ): Promise<SnippetEntity> {
+    if (userId !== updateSnippetInput.userId) {
+      throw new MethodNotAllowedException('User does not have rights to modify this snippet');
+    }
     return await this.snippetsService.updateSnippet(updateSnippetInput);
   }
 }
